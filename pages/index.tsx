@@ -5,9 +5,21 @@ import Link from "next/link";
 import styles from "../styles/Home.module.scss";
 /**Translator */
 import useTranslation from "next-translate/useTranslation";
-// @ts-ignore SLIDER
-import ImageGallery from "react-image-gallery";
-import "react-image-gallery/styles/css/image-gallery.css";
+
+/**Media Query */
+import { useMediaQuery } from 'react-responsive'
+
+// Import Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "swiper/css/zoom";
+
+// import required modules
+import { Autoplay, Pagination, Navigation, Zoom } from "swiper";
 
 const images = [
   {
@@ -42,19 +54,35 @@ const advantages = [
 ];
 
 import { useRouter } from "next/router";
-import classNames from "classnames";
 import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
   const { t } = useTranslation("common");
   const [location, setLocation] = useState([""]);
-
-  /**Link */
   const router = useRouter();
+  /**Current locate */
   const { locale } = router;
+  const[currentSlides, setCurrentSlides] =useState(3); 
+  /**Width */
+  const mob = useMediaQuery({ query: '(max-width: 560px)' })
+  const tab  = useMediaQuery({ query: '(max-width: 780px)' })
 
-  console.log("locale", locale);
-  console.log("location", location);
+  /**Media Query function */
+  console.log('mob', mob);
+  useEffect(() => {
+    if(mob) {
+      return setCurrentSlides(1);
+    }
+
+    if(tab) {
+      return setCurrentSlides(2);
+    }
+
+     setCurrentSlides(3);
+  },[mob, tab])
+  
+
+  /**Link , current location*/
 
   useEffect(() => {
     if (locale) {
@@ -141,15 +169,34 @@ const Home: NextPage = () => {
               <p>{t("intersing")}</p>
             </div>
             <div className={styles.sliderWrap}>
-              <ImageGallery
-                autoPlay={true}
-                infinite
-                showThumbnails={false}
-                showPlayButton={false}
-                items={images}
-                originalHeight="500"
-                originalWidth="500"
-              />
+              <Swiper
+                zoom={true}
+                loop={true}
+                slidesPerView={currentSlides}
+                spaceBetween={30}
+                pagination={{
+                  clickable: true,
+                }}
+                navigation={true}
+                modules={[Autoplay, Pagination, Navigation, Zoom]}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+              >
+                {images.map((item, index) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <Image
+                        src={item.original}
+                        alt="slide img"
+                        width="550"
+                        height="570"
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
             </div>
           </div>
         </div>

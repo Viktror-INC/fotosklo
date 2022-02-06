@@ -109,6 +109,10 @@
 
   h2 {
     font-size: 64px;
+
+    @media only screen and (max-width: $mob) {
+      font-size: 30px;
+    }
   }
 
   p {
