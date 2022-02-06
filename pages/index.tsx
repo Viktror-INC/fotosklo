@@ -68,7 +68,6 @@ const Home: NextPage = () => {
   const tab  = useMediaQuery({ query: '(max-width: 780px)' })
 
   /**Media Query function */
-  console.log('mob', mob);
   useEffect(() => {
     if(mob) {
       return setCurrentSlides(1);
