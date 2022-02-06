@@ -213,10 +213,10 @@
     row-gap: 20px;
 
     @media only screen and (max-width: $mob) {
-       justify-content: center;
-       margin: 0 auto;
-       align-items:center;
-       text-align: center;
+      justify-content: center;
+      margin: 0 auto;
+      align-items: center;
+      text-align: center;
     }
 
     span {
