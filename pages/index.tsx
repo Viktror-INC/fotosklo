@@ -38,6 +38,14 @@ const images = [
     original: "/images/sliderImg/4.jpg",
     thumbnail: "/images/sliderImg/4.jpg",
   },
+  {
+    original: "/images/sliderImg/5.jpg",
+    thumbnail: "/images/sliderImg/5.jpg",
+  },
+  {
+    original: "/images/sliderImg/6.jpg",
+    thumbnail: "/images/sliderImg/6.jpg",
+  },
 ];
 
 const advantages = [
@@ -190,7 +198,7 @@ const Home: NextPage = () => {
                         src={item.original}
                         alt="slide img"
                         width="550"
-                        height="570"
+                        height="770"
                       />
                     </SwiperSlide>
                   );
