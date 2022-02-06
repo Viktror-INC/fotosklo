@@ -7,7 +7,6 @@ import styles from "../styles/Home.module.scss";
 import useTranslation from "next-translate/useTranslation";
 // @ts-ignore SLIDER
 import ImageGallery from "react-image-gallery";
-// import "react-image-gallery/styles/scss/image-gallery.scss";
 import "react-image-gallery/styles/css/image-gallery.css";
 
 const images = [
@@ -43,20 +42,25 @@ const advantages = [
 ];
 
 import { useRouter } from "next/router";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import classNames from "classnames";
+import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
   const { t } = useTranslation("common");
+  const [location, setLocation] = useState([""]);
 
   /**Link */
   const router = useRouter();
   const { locale } = router;
 
   console.log("locale", locale);
+  console.log("location", location);
+
+  useEffect(() => {
+    if (locale) {
+      setLocation([locale]);
+    }
+  }, [locale]);
 
   const navList = [
     { name: "photo_in_glass", link: "#photo_in_glass" },
@@ -105,19 +109,28 @@ const Home: NextPage = () => {
               })}
             </div>
           </div>
-          <ul className={styles.languages}>
-            <li>
-              <Link href="/" locale="uk">
-                Український
-              </Link>
-            </li>
-            <li className={styles.slesh}>|</li>
-            <li>
-              <Link href="/ru" locale="ru">
-                Русский
-              </Link>
-            </li>
-          </ul>
+          <div className={styles.languagesWrap}>
+            <ul className={styles.languages}>
+              <li
+                className={
+                  location.includes("uk") ? styles.activeLanguager : ""
+                }
+              >
+                <Link href="/" locale="uk">
+                  Український
+                </Link>
+              </li>
+              <li
+                className={
+                  location.includes("ru") ? styles.activeLanguager : ""
+                }
+              >
+                <Link href="/ru" locale="ru">
+                  Русский
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </header>
       <main id="photo_in_glass" className={styles.main}>
@@ -134,6 +147,8 @@ const Home: NextPage = () => {
                 showThumbnails={false}
                 showPlayButton={false}
                 items={images}
+                originalHeight="500"
+                originalWidth="500"
               />
             </div>
           </div>

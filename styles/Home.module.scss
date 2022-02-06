@@ -5,6 +5,12 @@
   margin: 45px 0 auto;
   justify-content: space-between;
   align-items: center;
+
+  @media only screen and (max-width: $tab) {
+    margin: 25px 0 auto;
+    flex-direction: column;
+    row-gap: 20px;
+  }
 }
 
 .navigation {
@@ -16,6 +22,10 @@
   color: $black;
   column-gap: 15px;
   row-gap: 5px;
+
+  @media only screen and (max-width: $tab) {
+    row-gap: 15px;
+  }
 
   li {
     list-style: none;
@@ -47,21 +57,27 @@
   }
 }
 
+.languagesWrap {
+  display: flex;
+  margin: 0 auto;
+}
+
 .languages {
-  padding-left: 20px;
-  margin-top: 20px;
+  margin: 20px auto 0;
   display: flex;
   justify-content: center;
+  background-color: #1385a1;
+  border-radius: 5px;
 
   li {
+    background-color: #1385a1;
     list-style: none;
+    transition: all 0.3s linear;
+    padding: 10px 20px;
+    border-radius: 5px;
 
-    &:first-child {
-      padding-right: 10px;
-    }
-
-    &:last-child {
-      padding-left: 10px;
+    &.activeLanguager {
+      background-color: $blue;
     }
 
     a:hover {
@@ -123,17 +139,32 @@
 
 .sliderWrap {
   margin-top: 50px;
+  [class~="image-gallery-image"] {
+    @media only screen and (max-width: $tab) {
+      max-height: 500px !important;
+    }
+  }
 }
 
 .aboutUs {
-  margin-top: 120px;
+  margin: 120px auto 0;
   display: flex;
   column-gap: 80px;
+  justify-content: center;
+
+  @media only screen and (max-width: $tab) {
+    flex-direction: column;
+  }
 }
 
 .aboutUsTextWrap {
   width: 100%;
   max-width: 550px;
+  margin: 0 auto;
+
+  @media only screen and (max-width: $tab) {
+    margin: 40px auto 0;
+  }
 }
 
 .subTitle {
@@ -143,11 +174,22 @@
 
 .imageWrap {
   width: 100%;
+
+  @media only screen and (max-width: $tab) {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .aboutUsSpecial {
   margin-top: 10px;
   font-size: 48px;
+  font-weight: bold;
+
+  @media only screen and (max-width: $mob) {
+    font-size: 30px;
+  }
 }
 
 .aboutUsDescr {
@@ -160,11 +202,22 @@
   display: flex;
   column-gap: 80px;
 
+  @media only screen and (max-width: $mob) {
+    flex-direction: column;
+  }
+
   li {
     list-style: none;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+
+    @media only screen and (max-width: $mob) {
+       justify-content: center;
+       margin: 0 auto;
+       align-items:center;
+       text-align: center;
+    }
 
     span {
       font-size: 24px;
